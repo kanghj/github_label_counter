@@ -22,7 +22,7 @@ def assignable_short_name(assignable):
 
 if __name__ == "__main__":
     labels = ['e.1','e.2', 'e.4', 'e.8', 'e.16']
-    milestones = ['V5.78', 'V5.79', 'V5.80', 'V5.81']
+    milestones = ['V5.78', 'V5.79', 'V5.80', 'V5.81', 'V5.82']
 
     names = names_of_assignables(
         'kanghj', milestones, *labels

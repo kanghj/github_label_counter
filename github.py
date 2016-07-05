@@ -112,9 +112,9 @@ def numbers_of_assignable_in_soup(soup):
     try:
         return map(
             lambda metatext: extract_assignable_number(
-                metatext.findAll('span')[0].getText().strip()
+                metatext.getText().strip()
             ),
-            soup.findAll('div', class_="issue-meta")
+            soup.findAll('span', class_="opened-by")
         )
     except IndexError:
         """
@@ -137,7 +137,7 @@ def names_of_assignable_in_soups(*soups):
 def names_of_assignable_in_soup(soup):
     return map(
         lambda link: link.getText().strip(),
-        soup.findAll('a', class_="issue-title-link")
+        soup.findAll('a', class_="Box-row-link")
     )
 
 
