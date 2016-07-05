@@ -48,38 +48,41 @@ if __name__ == "__main__":
     bins = []
     bin_label_value = []
 
-    for label_index, (assignable_names, assignable_numbers) in enumerate(izip(names, numbers)):
-        print len(assignable_names)
-        name_iter = iter(assignable_names)
-        number_iter = iter(assignable_numbers)
+    for milestone, milestone_names, milestone_numbers in izip(milestones, names, numbers):
+        for label_index, (assignable_names, assignable_numbers) in enumerate(izip(milestone_names, milestone_numbers)):
+            print len(assignable_names)
+            name_iter = iter(assignable_names)
+            number_iter = iter(assignable_numbers)
 
-        label_value = value_of_labels[labels[label_index]]
-        num_things_in_bin = bin_size // label_value
-        try:
-            while True:
-                bin = []
-                bin_label_value.append(label_value)
-                for i in xrange(num_things_in_bin):
-                    assignable_name = next(name_iter)
-                    number = next(number_iter)
-                    print label_value, assignable_name, number
+            label_value = value_of_labels[labels[label_index]]
+            num_things_in_bin = bin_size // label_value
+            try:
+                while True:
+                    bin = []
+                    bin_label_value.append(label_value)
+                    for i in xrange(num_things_in_bin):
+                        assignable_name = next(name_iter)
+                        number = next(number_iter)
+                        print label_value, assignable_name, number
 
-                    bin.append(
-                        (assignable_name, number)
-                    )
+                        bin.append(
+                            (assignable_name, number)
+                        )
+                    bins.append(bin)
+
+            except StopIteration:
                 bins.append(bin)
 
-        except StopIteration:
-            bins.append(bin)
+        for bin_label, bin in izip(bin_label_value, bins):
+            print_just_number = len(bin) >= 8
+            for name, number in bin:
+                if print_just_number:
 
-    for bin_label, bin in izip(bin_label_value, bins):
-        print_just_number = len(bin) >= 8
-        for name, number in bin:
-            if print_just_number:
-                print str(bin_label) + 'h:' + number + ', ',
-            else:
-                print str(bin_label) + 'h:' + number + '-' + assignable_short_name(name) + ', ',
+                    print str(bin_label) + 'h:' + number + ', ',
+                else:
+                
+                    print str(bin_label) + 'h:' + str(number) + '-' + assignable_short_name(name) + ', ',
 
-        print ''
-        print '----'
+            print ''
+            print '----'
 
