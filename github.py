@@ -43,35 +43,36 @@ def num_closed_of_each_label(labels):
     return result
 
 
-def names_of_assignables(assignee, *labels):
-
-    return map(
+def names_of_assignables(assignee, milestones = None, *labels):
+    if milestones is None:
+        milestones = ['']
+    return [map(
         lambda label: (
             names_of_assignable_in_soups(
                 *soups_of(
                     'https://github.com/TEAMMATES/teammates/issues',
-                    filter='assignee:%s label:%s' % (assignee, label,)
+                    filter='assignee:%s label:%s milestone:%s' % (assignee, label, milestone)
                 )
 
             )
         ),
         labels
-    )
+    ) for milestone in milestones]
 
 
-def numbers_of_assignables(assignee, *labels):
+def numbers_of_assignables(assignee, milestones = None, *labels):
 
-    return map(
+    return [map(
         lambda label: (
             numbers_of_assignable_in_soups(
                 *soups_of(
                     'https://github.com/TEAMMATES/teammates/issues',
-                    filter='assignee:%s label:%s' % (assignee, label,)
+                    filter='assignee:%s label:%s milestone:%s' % (assignee, label, milestone)
                 )
             )
         ),
         labels
-    )
+    ) for milestone in milestones]
 
 
 def soups_of(url, filter):
@@ -127,6 +128,8 @@ def names_of_assignable_in_soups(*soups):
     for soup in soups:
         result.extend(names_of_assignable_in_soup(soup))
 
+    print "res is"
+    print result
     return result
 
 

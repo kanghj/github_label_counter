@@ -22,15 +22,18 @@ def assignable_short_name(assignable):
 
 if __name__ == "__main__":
     labels = ['e.1','e.2', 'e.4', 'e.8', 'e.16']
+    milestones = ['V5.78', 'V5.79', 'V5.80', 'V5.81']
 
     names = names_of_assignables(
-        'kanghj', *labels
+        'kanghj', milestones, *labels
     )
+    print "names ="
     print names
 
     numbers = numbers_of_assignables(
-        'kanghj', *labels
+        'kanghj', milestones, *labels
     )
+    print "numbers ="
     print numbers
 
     value_of_labels = {
